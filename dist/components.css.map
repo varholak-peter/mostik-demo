@@ -2,11 +2,11 @@
   "version": 3,
   "file": "components.css",
   "sources": [
-    "..\\src\\components\\HelloWorld.svelte"
+    "../src/components/HelloWorld.svelte"
   ],
   "sourcesContent": [
-    "<script>\r\n  import { count } from \"../store/store.js\";\r\n\r\n  /**\r\n   * Increases the count variable from the store by 1\r\n   */\r\n  function incrementCount() {\r\n    count.set($count + 1);\r\n  }\r\n</script>\r\n\r\n<style type=\"text/postcss\">.button{background-color:#2b6cb0;color:#fff;font-weight:700;padding:.5rem 1rem;border-radius:.25rem}</style>\r\n\r\n<div class=\"flex items-center justify-center h-screen bg-gray-200\">\r\n  <button class=\"button\" on:click={() => incrementCount()}>\r\n    Count is {$count}\r\n  </button>\r\n</div>\r\n"
+    "<script>\n  let registrationStatus = 'initial'\n  let data = null\n\n  async function registerCb () {\n    registrationStatus = 'pending'\n\n    try {\n      const res = await fetch('http://localhost:16557/register', {method: 'POST'})\n\n      if (res.ok) {\n        registrationStatus = 'registered'\n      }\n    } catch (err) {\n      registrationStatus = 'failed'\n    }\n  }\n\n  async function getDataCb () {\n    data = 'Loading data...'\n\n    try {\n      const res = await fetch('http://localhost:16557')\n      const resData = await res.json()\n      data = resData\n    } catch (err) {\n      data = 'Error fetching data'\n    }\n  }\n</script>\n\n<style type=\"text/postcss\">.button{background-color:#2b6cb0;color:#fff;font-weight:700;padding:.5rem 1rem;border-radius:.25rem}</style>\n\n<div class=\"flex flex-col items-center justify-center h-screen bg-gray-200\">\n  <div class=\"flex flex-col items-center justify-around h-56\">\n\n  <p>Registration status: {registrationStatus}</p>\n  <p>Data: {JSON.stringify(data, null, 2)}</p>\n  <br/>\n  <button class=\"button w-40\" on:click={registerCb}>Register</button>\n  <button class=\"button w-40\" on:click={getDataCb}>Get Data</button>\n  </div>\n</div>\n"
   ],
   "names": [],
-  "mappings": "AAW2B,qBAAO,CAAC,iBAAiB,OAAO,CAAC,MAAM,IAAI,CAAC,YAAY,GAAG,CAAC,QAAQ,KAAK,CAAC,IAAI,CAAC,cAAc,MAAM,CAAC"
+  "mappings": "AA+B2B,qBAAO,CAAC,iBAAiB,OAAO,CAAC,MAAM,IAAI,CAAC,YAAY,GAAG,CAAC,QAAQ,KAAK,CAAC,IAAI,CAAC,cAAc,MAAM,CAAC"
 }
