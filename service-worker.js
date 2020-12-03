@@ -1,10 +1,9 @@
 var cacheName = "sgtoilet-cache-" + Date.now();
 var filesToCache = [
-  "/",
-  "/index.html",
-  "/main.css",
-  "/main.js",
-  "/components.css",
+  "/mostik-demo/",
+  "/mostik-demo/main.css",
+  "/mostik-demo/main.js",
+  "/mostik-demo/components.css",
   "https://fonts.googleapis.com/css?family=Oswald|Roboto&display=swap"
 ];
 self.addEventListener("install", function(e) {
