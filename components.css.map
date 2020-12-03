@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "components.css",
+  "sources": [
+    "../src/components/HelloWorld.svelte"
+  ],
+  "sourcesContent": [
+    "<script>\n  let registrationStatus = 'initial'\n  let data = null\n\n  async function registerCb() {\n    registrationStatus = 'pending'\n\n    try {\n      const res = await fetch('http://localhost:16557/register', {method: 'POST'})\n\n      if (res.ok) {\n        registrationStatus = 'registered'\n      }\n    } catch (err) {\n      registrationStatus = 'failed'\n    }\n  }\n\n  async function getDataCb() {\n    data = 'Loading data...'\n\n    try {\n      const res = await fetch('http://localhost:16557')\n      const resData = await res.json()\n      data = resData\n    } catch (err) {\n      data = 'Error fetching data'\n    }\n  }\n</script>\n\n<style type=\"text/postcss\">.button{background-color:#2b6cb0;color:#fff;font-weight:700;padding:.5rem 1rem;border-radius:.25rem}</style>\n\n<div class=\"flex flex-col items-center justify-center h-screen bg-gray-200\">\n  <div class=\"flex flex-col items-center justify-around h-56\">\n    <p>Registration status: {registrationStatus}</p>\n    <p>Data: {JSON.stringify(data, null, 2)}</p>\n    <br/>\n    <button class=\"button w-40\" on:click={registerCb}>Register</button>\n    <button class=\"button w-40\" on:click={getDataCb}>Get Data</button>\n    <h2>We live in {window.matchMedia('(display-mode: standalone)').matches ? 'PWA 🎉' : 'Browser 😔'}</h2>\n  </div>\n</div>\n"
+  ],
+  "names": [],
+  "mappings": "AA+B2B,qBAAO,CAAC,iBAAiB,OAAO,CAAC,MAAM,IAAI,CAAC,YAAY,GAAG,CAAC,QAAQ,KAAK,CAAC,IAAI,CAAC,cAAc,MAAM,CAAC"
+}
